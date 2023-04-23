@@ -1,0 +1,44 @@
+public class PatientController : ApiController
+{
+    private readonly List<Patient> _patients = new List<Patient>();
+
+    // GET api/patient
+    public IEnumerable<Patient> Get()
+    {
+        return _patients;
+    }
+
+    // GET api/patient/5
+    public Patient Get(int id)
+    {
+        return _patients.FirstOrDefault(p => p.Id == id);
+    }
+
+    // POST api/patient
+    public void Post(Patient patient)
+    {
+        _patients.Add(patient);
+    }
+
+    // PUT api/patient/5
+    public void Put(int id, Patient patient)
+    {
+        var existingPatient = _patients.FirstOrDefault(p => p.Id == id);
+        if (existingPatient != null)
+        {
+            existingPatient.Name = patient.Name;
+            existingPatient.Address = patient.Address;
+            existingPatient.PhoneNumber = patient.PhoneNumber;
+        }
+    }
+
+    // DELETE api/patient/5
+    public void Delete(int id)
+    {
+        var existingPatient = _patients.FirstOrDefault(p => p.Id == id);
+        if (existingPatient != null)
+        {
+            _patients.Remove(existingPatient);
+        }
+    }
+}
